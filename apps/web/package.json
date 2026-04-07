@@ -21,7 +21,7 @@
         "build": "nx build",
         "build-stats": "nx build --json=webpack-stats.json",
         "vendor:modernizr": "modernizr -c .modernizr.json -d src/vector/modernizr.js && mv src/vector/modernizr.js src/vector/modernizr.cjs",
-        "vendor:jitsi": "curl -s https://meet.element.io/libs/external_api.min.js > ./res/jitsi_external_api.min.js",
+        "vendor:jitsi": "curl -s https://meet.ytkj.cn/libs/external_api.min.js > ./res/jitsi_external_api.min.js",
         "dist": "./scripts/package.sh",
         "start": "nx start",
         "lint": "pnpm lint:types && pnpm lint:js && pnpm lint:style",
@@ -246,5 +246,6 @@
     "engines": {
         "node": ">=22.18"
     },
+    "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319",
     "private": true
 }

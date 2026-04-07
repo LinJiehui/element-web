@@ -101,8 +101,8 @@ export class ElementWidget extends Widget {
         }
         let domain = super.rawData["domain"];
         if (domain === undefined) {
-            // v1 widgets default to meet.element.io regardless of user settings
-            domain = "meet.element.io";
+            // v1 widgets default to meet.ytkj.cn regardless of user settings
+            domain = "meet.ytkj.cn";
         }
 
         let theme = new ThemeWatcher().getEffectiveTheme();
