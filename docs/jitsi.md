@@ -35,7 +35,7 @@ to your [config](./config.md) the following:
 }
 ```
 
-Element's default is `meet.ytkj.cn` (a free service offered by Element). `meet.jit.si`
+Element's default is `meet.utenet.com` (a free service offered by Element). `meet.jit.si`
 is an instance hosted by Jitsi themselves and is also free to use.
 
 Once you've applied the config change, refresh Element and press the call button. This
@@ -65,7 +65,7 @@ calls work directly between clients or via TURN servers configured on the respec
 homeservers.
 
 For rooms with more than 2 joined members, when creating a Jitsi conference via call/video buttons of the toolbar (not via integration manager), Element Android will create a widget using the [wrapper](https://github.com/element-hq/element-web/blob/develop/docs/jitsi-dev.md) hosted on `app.element.io`.
-The domain used is the one specified by the `/.well-known/matrix/client` endpoint, and if not present it uses the fallback defined in `config.json` (meet.ytkj.cn)
+The domain used is the one specified by the `/.well-known/matrix/client` endpoint, and if not present it uses the fallback defined in `config.json` (meet.utenet.com)
 
 For active Jitsi widgets in the room, a native Jitsi widget UI is created and points to the instance specified in the `domain` key of the widget content data.
 

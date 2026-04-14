@@ -324,7 +324,7 @@ More information about the Jitsi setup can be found [here](./jitsi.md).
 The VoIP and Jitsi options are:
 
 1. `jitsi`: Optional configuration for how to start Jitsi conferences. Currently can only contain a single `preferred_domain`
-   value which points at the domain of the Jitsi instance. Defaults to `meet.ytkj.cn`. This is _not_ used if the Jitsi widget
+   value which points at the domain of the Jitsi instance. Defaults to `meet.utenet.com`. This is _not_ used if the Jitsi widget
    was created by an integration manager, or if the homeserver provides Jitsi information in `/.well-known/matrix/client`. For
    example:
     ```json

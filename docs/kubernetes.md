@@ -76,7 +76,7 @@ Then you can deploy it to your cluster with something like `kubectl apply -f my-
                 "breadcrumbs": true
             },
             "jitsi": {
-                "preferred_domain": "meet.ytkj.cn"
+                "preferred_domain": "meet.utenet.com"
             }
         }
 
