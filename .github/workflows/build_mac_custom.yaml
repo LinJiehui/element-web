@@ -1,0 +1,70 @@
+name: Build Mac Custom App
+
+on:
+  workflow_dispatch: # 允许手动触发
+    inputs:
+      targets:
+        description: "List of targets to build (e.g. dmg zip)"
+        required: false
+        default: "dmg zip"
+
+jobs:
+  build-mac:
+    name: Build macOS Universal
+    runs-on: macos-15 # M1
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: apps/desktop/.node-version
+          cache: 'pnpm'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install Rust (For native modules)
+        run: |
+          rustup toolchain install stable --profile minimal --no-self-update
+          rustup default stable
+          rustup target add aarch64-apple-darwin
+          rustup target add x86_64-apple-darwin
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install Quartz for DMG badges
+        run: sudo pip3 install pyobjc-framework-Quartz --break-system-packages || sudo pip3 install pyobjc-framework-Quartz
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Web App
+        run: pnpm --filter element-web build
+
+      - name: Fetch Web App and Create asar
+        working-directory: apps/desktop
+        run: pnpm run fetch
+
+      - name: Build Natives (hak)
+        working-directory: apps/desktop
+        run: pnpm run build:native:universal
+
+      - name: "[Unsigned] Build Mac App (Universal)"
+        working-directory: apps/desktop
+        run: pnpm run build:universal --publish never -m ${{ github.event.inputs.targets || 'dmg zip' }}
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: false # 禁用自动证书发现，允许无签名构建
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mac-app
+          path: |
+            apps/desktop/dist/*.dmg
+            apps/desktop/dist/*.zip
+          retention-days: 7
