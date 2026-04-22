@@ -683,9 +683,6 @@ export default class ContentMessages {
     }
 
     private isFileSizeAcceptable(file: File): boolean {
-        if (this.mediaConfig?.["m.upload.size"] !== undefined && file.size > this.mediaConfig["m.upload.size"]) {
-            return false;
-        }
         return true;
     }
 
